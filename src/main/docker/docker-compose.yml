@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  pg:
+    image: postgres
+    container_name: pg-birthdayCalendar
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '8765:5432'
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-birthdayCalendar
+    restart: always
+    ports:
+      - "5252:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@postgres.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  local_pgdata:
+  pgadmin-data:
